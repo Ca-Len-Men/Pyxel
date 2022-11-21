@@ -1,5 +1,6 @@
 # Hi, welcome to Easy-Game-with-Python !
 
+<img align="right" src="https://www.flaticon.com/free-icon/file_2635302?term=python&related_id=2635302">
 <h2 align="center">About me</h2>
 
 ```python
