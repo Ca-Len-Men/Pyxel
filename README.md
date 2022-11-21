@@ -22,8 +22,9 @@ if __name__ == '__main__':
 ```
 
 ### Before you continue, ensure you meet the following requirements
-* You have installed the *pygame* package.
-* You have a basic understanding of *python syntax*, *OOP of python* and *pygame*.
+* You have installed the *pygame* package 📦.
+* You have a basic understanding of *python syntax*, *OOP of python* and *pygame* 🎮:
+* You have installed the *speedgame* package in this repository 🎲.
 
 ## <h1 align="center">Tutorial</h1>
 
