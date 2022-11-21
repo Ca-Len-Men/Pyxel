@@ -1,4 +1,4 @@
-# Hi, welcome to Easy Game with Python ! 🔥🔥🔥
+<h1 align="center">Hi, welcome to Easy Game with Python ! 🔥🔥🔥</h1>
 
 <h2 align="center">ℹ️ About me ℹ️</h2>
 <img align="right" src="Image/icon.png">
@@ -24,3 +24,9 @@ if __name__ == '__main__':
 ### Before you continue, ensure you meet the following requirements
 * You have installed the *pygame* package.
 * You have a basic understanding of *python syntax*, *OOP of python* and *pygame*.
+
+## Tutorial</h1>
+	
+## About Package
+
+## Demo
