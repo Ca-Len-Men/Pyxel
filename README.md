@@ -25,8 +25,24 @@ if __name__ == '__main__':
 * You have installed the *pygame* package.
 * You have a basic understanding of *python syntax*, *OOP of python* and *pygame*.
 
-## Tutorial</h1>
-	
-## About Package
+## <h1 align="center">Tutorial</h1>
 
-## Demo
+<details>
+<summary><h3>Variable name <i>'app'</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
+
+---
+<details>
+<summary><h3>Variable name <i>'icon'</i>, <i>'font'</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
+
+---
+<details>
+<summary><h3><i>Image</i> and <i>Label</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
