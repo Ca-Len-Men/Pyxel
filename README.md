@@ -1,4 +1,4 @@
-# Hi, welcome to Easy-Game-with-Python !
+# Hi, welcome to Easy Game with Python !
 
 <img align="right" src="Image/icon.png">
 <h2 align="center">About me</h2>
