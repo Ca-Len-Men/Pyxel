@@ -30,6 +30,60 @@ if __name__ == '__main__':
 
 - Download the *speedgame* folder ( *speedgame* package ), put them in the same folder of the project.
 
+## <h1 align="center">Quick introduction</h1>
+
+> Introduce the modules of the package.
+
+<details>
+<summary><h3>About module <i>Handle</i></h3></summary>
+<br>
+<table>
+	<tr>
+		<td>Name</td>
+		<td>Type</td>
+		<td>Feature</td>
+	</tr>
+	<tr>
+		<td>GameHandle</td>
+		<td>Class</td>
+		<td>Class with application program management functionality.</td>
+	</tr>
+	<tr>
+		<td>app</td>
+		<td>Variable</td>
+		<td>Instance of GameHandle, pre-initialized for use as a global variable.</td>
+	</tr>
+</table>
+</details>
+
+---
+<details>
+<summary><h3>About module <i>Basic</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
+
+---
+<details>
+<summary><h3>About module <i>Surface</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
+
+---
+<details>
+<summary><h3>About module <i>Control</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
+
+---
+<details>
+<summary><h3>About module <i>Controller</i></h3></summary>
+<br>
+Well, you will learn it !
+</details>
+
 ## <h1 align="center">🔥 Tutorial 🔥</h1>
 
 > You should study the items in turn in the order below. 🥇
