@@ -26,7 +26,7 @@ if __name__ == '__main__':
 * You have a basic understanding of *python syntax*, *OOP of python* and *pygame* 🎮.
 * You have installed the *speedgame* package in this repository 🎲.
 
-## <h1 align="center">⛓️ Installation ⛓️</h1>
+## <h1 align="center">⛓️ Install package ⛓️</h1>
 
 - Download the *speedgame* folder ( *speedgame* package ), put them in the same folder of the project.
 
