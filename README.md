@@ -37,23 +37,14 @@ if __name__ == '__main__':
 <details>
 <summary><h3>About module <i>Handle</i></h3></summary>
 <br>
-<table>
-	<tr>
-		<td>Name</td>
-		<td>Type</td>
-		<td>Feature</td>
-	</tr>
-	<tr>
-		<td>GameHandle</td>
-		<td>Class</td>
-		<td>Class with application program management functionality.</td>
-	</tr>
-	<tr>
-		<td>app</td>
-		<td>Variable</td>
-		<td>Instance of GameHandle, pre-initialized for use as a global variable.</td>
-	</tr>
-</table>
+
+Name | Type | Feature |
+:---: | :---: | ---
+`GameHandle` | Class | Class with application program management functionality.
+`app` | Variable | Instance of `GameHandle`, pre-initialized for use as a *global variable*.
+`app.cursor` | Variable | Instance of `CursorHandle`, used to get mouse information, events.
+`app.time` | Variable | Instance of `TimeHandle`, used to get the interval between two consecutive frames.
+
 </details>
 
 ---
