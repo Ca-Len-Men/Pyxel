@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
 Name | Type | Feature |
 :---: | :---: | ---
-`GameHandle` | Class | Class with application program management functionality.
+`GameHandle` | Class SingletonMeta | Class with application program management functionality.
 `app` | Variable | Instance of `GameHandle`, pre-initialized for use as a *global variable*.
 `app.cursor` | Variable | Instance of `CursorHandle`, used to get mouse information, events.
 `app.time` | Variable | Instance of `TimeHandle`, used to get the interval between two consecutive frames.
@@ -51,14 +51,31 @@ Name | Type | Feature |
 <details>
 <summary><h3>About module <i>Basic</i></h3></summary>
 <br>
-Well, you will learn it !
+
+Name | Type | Feature |
+:---: | :---: | ---
+`Color` | Static Class | `Color` defines default colors.
+`Math` | Static Class | `Math` defines basic calculation functions.
+`Vector2` | Class | Support calculations with vectors in the plane.
+`icon` | Variable | The global variable `icon` is used to load icons in the `InterfaceIcons` directory.
+`font` | Variable | The global variable `font` is used to load fonts in the `InterfaceFonts` directory.
+
 </details>
 
 ---
 <details>
 <summary><h3>About module <i>Surface</i></h3></summary>
 <br>
-Well, you will learn it !
+
+Name | Type | Feature |
+:---: | :---: | ---
+`ImageProcessor` | Static Class | `ImageProcessor` provides methods for processing images.
+`Image` | Class | Save an image, coordinates, size of the image, ... .
+`Label` | Class | Save and image of label, title, position, size of image, ... .
+`FPSLabel` | Class | Show the number of frames per second, it will change every millisecond `time_wait`.
+`CursorImage` | Class | Save icons of cursor.
+`CursorShoot` | Class | Save icons of cursor.
+
 </details>
 
 ---
