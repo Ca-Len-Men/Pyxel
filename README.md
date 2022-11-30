@@ -82,14 +82,29 @@ Name | Type | Feature |
 <details>
 <summary><h3>About module <i>Control</i></h3></summary>
 <br>
-Well, you will learn it !
+
+Name | Type | Feature |
+:---: | :---: | ---
+`Control` | Abstract Class | Interface for control classes.
+`Button` | Abstract Class | Interface for *button* classes.
+`ImageControl` | Class | Image class has additional events.
+`ButtonBoostrap` | Class | Button class simulates **Bootstrap**.
+`ButtonImage` | Class | `ButtonImage` class takes image as a button.
+`PickPopEvent` | Class | Simulate surface drag and drop event.
+
 </details>
 
 ---
 <details>
 <summary><h3>About module <i>Controller</i></h3></summary>
 <br>
-Well, you will learn it !
+
+Name | Type | Feature |
+:---: | :---: | ---
+`ExistenceController` | Class | `ExistenceController` class support initial, destroy game objects.
+`SceneController` | Class SingletonMeta | The `SceneController` class supports the management of scenes.
+`LayerController` | Class | The `LayerController` support the management of layers.
+
 </details>
 
 ## <h1 align="center">🔥 Tutorial 🔥</h1>
