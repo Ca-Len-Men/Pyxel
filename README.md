@@ -66,7 +66,15 @@ In other words, with `pygamesupporter`, organizing and managing game scenes has 
 <summary><h3>About: <i>Screen concept</i></h3></summary>
 <br>
 
+As its name suggests, a `screen` object is used to display other objects, and <i>the objects inside cannot be displayed outside its display area</i>.<br>
 
+Furthermore, a `screen` object can contain one or more other `screen` objects (a `screen` is displayed within a `screen`). This means that the application game screen is a top-level `screen` object (it is the parent of all other `screen` objects). Let's refer to this as the `screen root`, which we store in a global variable named `app` (inside the module named `base`).<br>
+
+The simplest `Screen` type such as `app` only displays the objects it contains. The features of a screen can include reflecting back on itself (like an image reflecting under the water surface), rounding corners (objects displayed at a corner position will also be rounded because it cannot be displayed outside the area of that screen), or many other creative features.<br>
+
+The absolute position of the mouse cursor on the root application screen (also the root screen object) is mapped to a relative position on other screen objects. This means that, for objects within a screen, the top-left corner is counted as position `(0, 0)`, but that position compared to its parent screen object may be different.
+
+The order in which objects are displayed is to display objects in the lowest-level screens first, then display those lowest-level screens, sequentially perform operations on the parent screens, and finally update the root screen.
 </details>
 
 ---
