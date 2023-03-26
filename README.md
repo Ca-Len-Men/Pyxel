@@ -28,15 +28,15 @@ if __name__ == '__main__':
 ```
 
 ### Before you continue, ensure you meet the following requirements
-* You have installed the **pygame**, **numpy** package 📦.
+* You have installed the `pygame`, `numpy` package 📦.
 * You have a basic understanding of *python syntax*, *Object Oriented Programing of python* and *pygame package* 🎮.
-* You have installed the **pygamesupporter** package in this repository 🎲.
+* You have installed the `pygamesupporter` package in this repository 🎲.
 
 ## <h1 align="center">⛓️ Install package ⛓️</h1>
 
-- Download the **pygamesupporter** folder ( **pygamesupporter** package ), put them in the same folder of the project.
+- Download the **pygamesupporter** folder ( `pygamesupporter` package ), put them in the same folder of the project.
 
-## <h1 align="center">Quick introduction</h1>
+## <h1 align="center">📖 Quick introduction 📖</h1>
 
 > Introduces powerful features in the **pygamesupporter** package.
 
@@ -63,17 +63,9 @@ In other words, with `pygamesupporter`, organizing and managing game scenes has 
 
 ---
 <details>
-<summary><h3>About module <i>Surface</i></h3></summary>
+<summary><h3>About: <i>Screen concept</i></h3></summary>
 <br>
 
-Name | Type | Feature |
-:---: | :---: | ---
-`ImageProcessor` | Static Class | `ImageProcessor` provides methods for processing images.
-`Image` | Class | Save an image, coordinates, size of the image, ... .
-`Label` | Class | Save and image of label, title, position, size of image, ... .
-`FPSLabel` | Class | Show the number of frames per second, it will change every millisecond `time_wait`.
-`CursorImage` | Class | Save icons of cursor.
-`CursorShoot` | Class | Save icons of cursor.
 
 </details>
 
