@@ -1,7 +1,7 @@
 <h1 align="center">🐍 PYXEL 1.0.0 🐍</h1>
 
 <h1 align="center">🎮 Giới thiệu 🎮</h1>
-<img align="right" width="256px" height="256px" src="Image/snakes.png">
+<img align="right" width="256px" height="256px" src="Assets/snakes.png">
 
 ### Về thư viện `PYXEL`
 - `PYXEL` là thư viện <u>mã nguồn mở</u> được xây dựng dựa trên `Pygame`, dưới tinh thần lắng nghe ý kiến người dùng, hợp tác và cùng phát triển.
@@ -45,3 +45,10 @@
 	- [PYXEL5](#PYXEL5) : Tùy vào loại `Component`, mà có thể có nhiều `Component` <u>cùng loại</u> cùng gắn trên một `Entity`, hoặc <u>chỉ một loại</u> `Component` được gắn trên `Entity` đó.
 	- [PYXEL6](#PYXEL6) : `Entity` chỉ có chức năng lưu trữ `Component`, không thể được phép kế thừa hoặc mở rộng.
 </details>
+
+## <h1 align="center">⛓️ Sản phẩm ⛓️</h1>
+
+- Cùng điểm qua một số sản phẩm nhỏ được tạo bằng `PYXEL` nhé 😊.
+
+# TODO
+
