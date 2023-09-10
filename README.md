@@ -1,6 +1,6 @@
 <h1 align="center">🐍 PYXEL 1.0.0 🐍</h1>
 
-<h2 align="center">🎮 Giới thiệu nhanh 🎮</h2>
+<h1 align="center">🎮 Giới thiệu 🎮</h1>
 <img align="right" width="256px" height="256px" src="Image/snakes.png">
 
 ### Về thư viện `PYXEL`
