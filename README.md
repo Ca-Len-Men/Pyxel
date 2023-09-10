@@ -30,12 +30,16 @@
 	- [PYXEL2](#PYXEL2) : Dựa vào `PYXEL1`, ta có một <u>cây</u> gồm các nút là các `Canvas`, với nút gốc ( `root` ) chính là toàn màn hình của ứng dụng.
 </details>
 
+</br>
+
 <details>
 <summary><h3>Đối tượng <code>Entity</code></h3></summary>
 <br>
 - Là "định danh" cho một "thực thể" bên trong trò chơi :
 	- [PYXEL3](#PYXEL3) : Một `Canvas` có thể chứa nhiều `Entity`.
 </details>
+
+</br>
 
 <details>
 <summary><h3>Đối tượng <code>Component</code></h3></summary>
@@ -45,3 +49,5 @@
 	- [PYXEL5](#PYXEL5) : Tùy vào loại `Component`, mà có thể có nhiều `Component` <u>cùng loại</u> cùng gắn trên một `Entity`, hoặc <u>chỉ một loại</u> `Component` được gắn trên `Entity` đó.
 	- [PYXEL6](#PYXEL6) : `Entity` chỉ có chức năng lưu trữ `Component`, không thể được phép kế thừa hoặc mở rộng.
 </details>
+
+</br>
