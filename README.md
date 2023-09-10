@@ -1,78 +1,47 @@
-<h1 align="center">Hi, welcome to Easy Game with Python ! 🔥🔥🔥</h1>
+<h1 align="center">🐍 PYXEL 1.0.0 🐍</h1>
 
-<h2 align="center">🎮 A couple of introductions 🎮</h2>
-<img align="right" src="Image/icon.png">
+<h2 align="center">🎮 Giới thiệu nhanh 🎮</h2>
+<img align="right" width="300px" height="300px" src="Image/snakes.png">
 
-```python
-print('Hello there, I am Fish. :3')
-print('I enjoy programming, particularly in data structures, algorithms, and game development')
-print('Now, let me introduce you to my project. <3')
+### Về thư viện `PYXEL`
+- `PYXEL` là thư viện <u>mã nguồn mở</u> được xây dựng dựa trên `Pygame`, dưới tinh thần lắng nghe ý kiến người dùng, hợp tác và cùng phát triển.
+- `PYXEL` cung cấp nhiều tiện ích, tính năng cho phát triển trò chơi 2D :
+	- Dễ dàng cho người mới học.
+	- Cung cấp các mẫu đồ họa đẹp mắt.
+	- Hỗ trợ tận tình cho người dùng từ A đến Z.
 
-objective = {
-	'overview': 'easy to use',
-	'community': 'easy to share source code',
-	'optimization': 'high reusability, source code optimization'
-}
-print('Our goal is to provide a powerful Python library for game development :',
-	objective, sep='\n')
+### Trước khi bắt đầu, `PYXEL` yêu cầu bạn :
+* Đã cài đặt gói `pygame`, `numpy` 📦 ( <b>bắt buộc</b> ).
+* Bạn hãy lựa chọn một trong hai gói sau để tải về :
+	- Phiên bản Pure Python : ~~chưa hoàn thành~~ ...
+	- Phiên bản Cython		: ~~chưa hoàn thành~~ ...
+	- <b>Lưu ý</b> : đối với phiên bản Cython, `PYXEL` đòi bạn cài thêm gói `Cython` và thực thi tệp `setup.py` mới có thể xử dụng.
 
-knowledge = {
-	'programming language': 'basic understanding of Python',
-	'level': 'be able to read and comprehend documentation',
-	'library': 'know how to use the Pygame and Numpy libraries'
-}
-print('Before you start using it, you should have :', knowledge, sep='\n')
+## <h1 align="center">⛓️ Mô hình Canvas Layer - Entity - Component ⛓️</h1>
 
-if __name__ == '__main__':
-	print('Welcome to our pygamesupporter package !')
-```
-
-### Before you continue, ensure you meet the following requirements
-* You have installed the `pygame`, `numpy` package 📦.
-* You have a basic understanding of *python syntax*, *Object Oriented Programing of python* and *pygame package* 🎮.
-* You have installed the `pygamesupporter` package in this repository 🎲.
-
-## <h1 align="center">⛓️ Install package ⛓️</h1>
-
-- Download the **pygamesupporter** folder ( `pygamesupporter` package ), put them in the same folder of the project.
-
-## <h1 align="center">📖 Quick introduction 📖</h1>
-
-> Introduces powerful features in the **pygamesupporter** package.
+> Vì cảm thấy mô hình này phù hợp với tình hình hiện tại, nếu độc giả có góp ý chỉnh sửa, hoặc có ý tưởng sửa đổi phù hợp hơn, xin hãy liên hệ cho tôi 😊. Thank you so much !
 
 <details>
-<summary><h3>About: <i>Pygame wrapper</i></h3></summary>
+<summary><h3>Đối tượng <code>Canvas</code></h3></summary>
 <br>
-
-The `pygamesupporter` package provides a `pygame` wrapper to handle events that occur within the game. You will indirectly use `pygame` methods through classes provided by `pygamesupporter`, or use them directly on `pygame`.
-- With this package, you can easily handle and manipulate mouse and keyboard events to interact with the game. Additionally, it also allows you to draw mouse cursor icons using external images or default icons.
-- It provides variables related to time such as delta time and fps. This makes handling real-time events and displaying the game's FPS a breeze. In fact, you can even create your own FPS game.
+- Là khu vực dùng để hiển thị các đối tượng bên trong nó ( hãy xem nó như một màn hình, các đối tượng bên trong không thể được hiển thị ra bên ngoài màn hình ).
+- Chúng ta sẽ đặt ra các quy tắc để dễ dàng làm việc với nhau :
+	- [PYXEL1](#PYXEL1) : Một `Canvas` có thể chứa nhiều `Canvas` khác.
+	- [PYXEL2](#PYXEL2) : Dựa vào `PYXEL1`, ta có một <u>cây</u> gồm các nút là các `Canvas`, với nút gốc ( `root` ) chính là toàn màn hình của ứng dụng.
 </details>
 
----
 <details>
-<summary><h3>About: <i>Each scene in one class</i></h3></summary>
+<summary><h3>Đối tượng <code>Entity</code></h3></summary>
 <br>
-
-<i>Each scene in the game is written separately in a separate class</i>, making it easier for you to focus on managing a scene efficiently.<br>
-
-Moreover, `pygamesupporter` <i>allows you to easily share data between different scenes</i>. This feature allows you <i>to reuse controls from another scene without having to create them again</i>, reducing the user's wait time when switching scenes and providing the best possible user experience.
-
-In other words, with `pygamesupporter`, organizing and managing game scenes has never been easier ! Try it out for yourself and see the difference.
+- Là "định danh" cho một "thực thể" bên trong trò chơi :
+	- [PYXEL3](#PYXEL3) : Một `Canvas` có thể chứa nhiều `Entity`.
 </details>
 
----
 <details>
-<summary><h3>About: <i>Screen concept</i></h3></summary>
+<summary><h3>Đối tượng <code>Component</code></h3></summary>
 <br>
-
-As its name suggests, a `screen` object is used to display other objects, and <i>the objects inside cannot be displayed outside its display area</i>.<br>
-
-Furthermore, a `screen` object can contain one or more other `screen` objects (a `screen` is displayed within a `screen`). This means that the application game screen is a top-level `screen` object (it is the parent of all other `screen` objects). Let's refer to this as the `screen root`, which we store in a global variable named `app` (inside the module named `base`).<br>
-
-The simplest `Screen` type such as `app` only displays the objects it contains. The features of a screen can include reflecting back on itself (like an image reflecting under the water surface), rounding corners (objects displayed at a corner position will also be rounded because it cannot be displayed outside the area of that screen), or many other creative features.<br>
-
-The absolute position of the mouse cursor on the root application screen (also the root screen object) is mapped to a relative position on other screen objects. This means that, for objects within a screen, the top-left corner is counted as position `(0, 0)`, but that position compared to its parent screen object may be different.
-
-The order in which objects are displayed is to display objects in the lowest-level screens first, then display those lowest-level screens, sequentially perform operations on the parent screens, and finally update the root screen.
+- Là các "thành phần" được gắn vào một và chỉ một `Entity`, các `Component` bên trong liên kết hoàn chỉnh thành một "thực thể" :
+	- [PYXEL4](#PYXEL4) : Một `Entity` có thể chứa nhiều `Component`.
+	- [PYXEL5](#PYXEL5) : Tùy vào loại `Component`, mà có thể có nhiều `Component` <u>cùng loại</u> cùng gắn trên một `Entity`, hoặc <u>chỉ một loại</u> `Component` được gắn trên `Entity` đó.
+	- [PYXEL6](#PYXEL6) : `Entity` chỉ có chức năng lưu trữ `Component`, không thể được phép kế thừa hoặc mở rộng.
 </details>

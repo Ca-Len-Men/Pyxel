@@ -1,0 +1,2 @@
+
+FLAG_NO_RENDER = 'FNR'
