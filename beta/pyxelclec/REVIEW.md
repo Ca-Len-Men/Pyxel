@@ -4,9 +4,9 @@
 <h1 align="center">🎮 Giới thiệu sơ đồ 🎮</h1>
 <img align="right" width="256px" height="256px" src="../../Assets/code-review.png">
 
-### Cây thư mục
+### Cây thư mục dự án
 
-```
+```bash
 pyxelclec
 +----geo
 |       \   __init__.py
@@ -49,7 +49,8 @@ pyxelclec
 
 <h1 align="center">📑 Giới thiệu <code>pyxelclec.geo</code> 📑</h1>
 
-### Module `fmath.py`
+<details>
+<summary><a name="fmath.py"></a><h3>Module <code>fmath.py</code></h3></summary>
 
 - Các hàm tính toán :
 
@@ -63,7 +64,11 @@ pyxelclec
 | **def** angle(`vec_x`: *float*, `vec_y`: *float*) -> *float* | Tính góc của `vector(x, y)` | Giá trị trả về trong đoạn `[0, 360]` |
 | **def** vector(`__degrees`: *float*) -> Tuple[*float*, *float*] | Trả về giá trị `x, y` của `vector` độ dài `1` có góc bằng `__degrees` | |
 | **def** magnitude(`x`: *float*, `y`: *float*) -> *float* | Tính độ dài `vector(x, y)` | |
-| **def** lerp(`current`: *float*, `target`: *float*, `delta`: *float*) -> *float* | Tịnh tiếng từ `current` đến `target` một khoảng `delta` | |
+| **def** lerp(`current`: *float*, `target`: *float*, `delta`: *float*) -> *float* | Tịnh tiến từ `current` đến `target` một khoảng `delta` | |
+
+</details>
+
+---
 
 ### Module `fvector.py`
 
