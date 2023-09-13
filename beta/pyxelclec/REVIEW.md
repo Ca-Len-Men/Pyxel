@@ -6,8 +6,6 @@
 
 ### Cây thư mục dự án
 
-[fmath.py](#fmath-py)
-
 ```
 pyxelclec
 +----geo
@@ -49,10 +47,10 @@ pyxelclec
 
 ---
 
-<h1 align="center">📑 Giới thiệu <code>pyxelclec.geo</code> 📑</h1>
+<h1 align="center"><a name="pyxelclec.geo"></a>📑 Giới thiệu <code>pyxelclec.geo</code> 📑</h1>
 
 <details>
-<summary><a name="fmath-py"></a><h3>Module <code>fmath.py</code></h3></summary>
+<summary><a name="fmath.py"></a><h3>Module <code>fmath.py</code></h3></summary>
 
 - Triển khai các hàm toán học cơ bản :
 
