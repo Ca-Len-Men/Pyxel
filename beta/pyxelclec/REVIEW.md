@@ -57,13 +57,13 @@ pyxelclec
 |:--------------|:---------:|:--------|
 | APPROXIMATE = 0.000_000_001 | Sai số có thể chấp nhận | |
 | PI = 3.14159_26535_89793 | Giá trị xấp xỉ của `pi` | |
-| def _radians(`__degrees`: float) -> float | Đổi từ `degrees` sang `radians` | |
-| def _degrees(`__radians`: float) -> float | Đổi từ `radians` sang `degrees` | |
-| def relative_compare(`a`: float, `b`: float) -> bool | So sánh bằng hai kiểu `float` | `abs(a - b) <= APPROXIMATE` thì được xem là `a == b` |
-| def angle(`vec_x`: float, `vec_y`: float) -> float | Tính góc của `vector(x, y)` | Giá trị trả về trong đoạn `[0, 360]` |
-| def vector(`__degrees`: float) -> Tuple[float, float] | Trả về giá trị `x, y` của `vector` độ dài `1` có góc bằng `__degrees` | |
-| def magnitude(`x`: float, `y`: float) -> float | Tính độ dài `vector(x, y)` | |
-| def lerp(`current`: float, `target`: float, `delta`: float) -> float | Tịnh tiếng từ `current` đến `target` một khoảng `delta` | |
+| **def** _radians(`__degrees`: *float*) -> *float* | Đổi từ `degrees` sang `radians` | |
+| **def** _degrees(`__radians`: *float*) -> float | Đổi từ `radians` sang `degrees` | |
+| **def** relative_compare(`a`: *float*, `b`: *float*) -> *bool* | So sánh bằng hai kiểu `float` | `abs(a - b) <= APPROXIMATE` thì được xem là `a == b` |
+| **def** angle(`vec_x`: *float*, `vec_y`: *float*) -> *float* | Tính góc của `vector(x, y)` | Giá trị trả về trong đoạn `[0, 360]` |
+| **def** vector(`__degrees`: *float*) -> Tuple[*float*, *float*] | Trả về giá trị `x, y` của `vector` độ dài `1` có góc bằng `__degrees` | |
+| **def** magnitude(`x`: *float*, `y`: *float*) -> *float* | Tính độ dài `vector(x, y)` | |
+| **def** lerp(`current`: *float*, `target`: *float*, `delta`: *float*) -> *float* | Tịnh tiếng từ `current` đến `target` một khoảng `delta` | |
 
 ### Module `fvector.py`
 
