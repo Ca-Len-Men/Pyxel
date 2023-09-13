@@ -160,9 +160,56 @@ pyxelclec
 
 ---
 
-### Module `frect.py`
 
-- Updating ...
+<details>
+<summary><a name="frect.py"></a><h3>Module <code>frect.py</code></h3></summary>
+
+- Module `frect` chủ yếu mô phỏng hình chữ nhật trong mặt phẳng ( hệ tọa độ `Oxy` ).
+- Hình chữ nhật được xác định bằng vị trí `top left` ( là góc dưới bên trái trong hệ tọa độ `Oxy`, hoặc góc trên bên trái đối với màn hình ứng dụng ) và kích thước `width height` ( chiều ngang và chiều dọc ).
+- Thường dùng để căn chỉnh vị trí phù hợp, xác định va chạm, ... :
+    - [StructRect](#StructRect)
+    - [Rect](#Rect)
+
+---
+
+- <a name="StructRect"></a> Lớp <code>StructRect</code> : là hình chữ nhật được xác định bởi `top left` và `width height`.
+
+| Attribute và Method | Chức năng | Ghi chú |
+|:--------------|:---------:|:--------|
+| `_position`: *Vector* | Vị trí `top left` | |
+| `_size`: *Vector* | Kích thước `width height` | |
+| `size`: *Vector* (get/set) | Kích thước hình chữ nhật | Mọi thay đổi trên `_size` đều phải thông qua `property setter` của `size` |
+| `w`: *float* (get/set) | Chiều ngang hình chữ nhật | |
+| `h`: *float* (get/set) | Chiều dọc hình chữ nhật | |
+| `topleft`: *Vector* (get/set) | | Mọi thay đổi trên `_position` đều phải thông qua `property setter` của `topleft`. |
+| `topright`: *Vector* (get/set) | ... | |
+| `bottomleft`: *Vector* (get/set) | ... | |
+| `bottomright`: *Vector* (get/set) | ... | |
+| `center`: *Vector* (get/set) | ... | |
+| `midtop`: *Vector* (get/set) | ... | |
+| `midbottom`: *Vector* (get/set) | ... | |
+| `midleft`: *Vector* (get/set) | ... | |
+| `midright`: *Vector* (get/set) | ... | |
+| `midx`: *float* (get/set) | Hoặc `midtop.x` | |
+| `midy`: *float* (get/set) | Hoặc `midleft.y` | |
+| **def** \_\_init__(self, `size`: *Vector*, position: *Vector* = *None*) | Khởi tạo | Nếu `position is None`, mặc định `topleft = Vector.zero()` |
+| **def** collide_point(self, `point`: *Vector*) -> *bool* | Kiểm tra `point` có nằm trên `StructRect` không ( bao gồm viền ) | |
+
+---
+
+- <a name="Rect"></a> Lớp <code>Rect</code> : kế thừa từ <code>StructRect</code>, cho phép thêm các hành động khi có sự thay đổi trên vị trí hoặc kích thước của nó.
+
+| Attribute và Method | Chức năng | Ghi chú |
+|:--------------|:---------:|:--------|
+| **def** \_\_init__(self, `size`: *Vector*, `position`: *Vector* = *None*) | Khởi tạo | Override |
+| **def** size_listener(self, `__listener`: *WeakrefMethod*) | Thêm hành động khi kích thước thay đổi | |
+| **def** pos_listener(self, `__listener`: *WeakrefMethod*) | Thêm hành động khi vị trí thay đổi | |
+| **def** only_set_size(self, `__size`: *Vector*) | Chỉ thay đổi kích thước, không kích hoạt hành động | |
+| **def** only_set_topleft(self, `__topleft`: *Vector*) | Chỉ thay đổi vị trí, không kích hoạt hành động | |
+
+</details>
+
+---
 
 ### Module `fdraw.py`
 
