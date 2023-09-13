@@ -9,6 +9,9 @@
 	- Dễ dàng cho người mới học.
 	- Cung cấp các mẫu đồ họa đẹp mắt.
 	- Hỗ trợ tận tình cho người dùng từ A đến Z.
+- Thông tin đến các ***cộng tác viên*** :
+	- Chi tiết về `pyxelclec` : [REVIEW.md](base/pyxelclec/REVIEW.md)
+	- Chi tiết về `cyxelclec` : Updating...
 
 ### Trước khi bắt đầu, `PYXEL` yêu cầu bạn :
 * Đã cài đặt gói `pygame`, `numpy` 📦 ( <b>bắt buộc</b> ).
