@@ -141,10 +141,11 @@ class StructRect:
 class Rect(StructRect):
     def __init__(self, size, position=None):    # type: ignore
         if position:
-            self._position = VectorListener(position.x, position.y)
+            position = VectorListener(position.x, position.y)
         else:
-            self._position = VectorListener(0, 0)
-        self._size = VectorListener(size.x, size.y)
+            position = VectorListener(0, 0)
+        size = VectorListener(size.x, size.y)
+        super().__init__(size, position)
 
     def size_listener(self, __listener):
         self._size.add_listener(__listener)
@@ -157,5 +158,3 @@ class Rect(StructRect):
 
     def only_set_topleft(self, __topleft):
         self._position.only_set(__topleft)
-
-
