@@ -6,7 +6,9 @@
 
 ### Cây thư mục dự án
 
-```bash
+[fmath.py](#fmath-py)
+
+```
 pyxelclec
 +----geo
 |       \   __init__.py
@@ -50,9 +52,9 @@ pyxelclec
 <h1 align="center">📑 Giới thiệu <code>pyxelclec.geo</code> 📑</h1>
 
 <details>
-<summary><a name="fmath.py"></a><h3>Module <code>fmath.py</code></h3></summary>
+<summary><a name="fmath-py"></a><h3>Module <code>fmath.py</code></h3></summary>
 
-- Các hàm tính toán :
+- Triển khai các hàm toán học cơ bản :
 
 | Các biến và hàm | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
