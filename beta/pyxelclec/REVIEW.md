@@ -96,9 +96,9 @@ pyxelclec
 
 - Hỗ trợ các phương thức tính toán với `Vector`.
 
-| Method | Chức năng | Ghi chú |
+| Methos | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
-| **def** \_\_init__(self, `x`: *float*, `y`: *float*) | Khởi tạo `Vector` | |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self, `x`: *float*, `y`: *float*) | Khởi tạo `Vector` | |
 | **def** setxy(self, `__x`: *float*, `__y`: *float*) | Gán thuộc tính `x, y` | **Đáng chú ý** : mọi thay đổi trên `x, y` đều phải được thông qua hàm này ( bao gồm **set property** ) ! |
 | **def** set(self, `source`: *Union[Tuple[float, float], List[float], Vector]*) | Gán thuộc tính `x, y` | |
 | **def** copy(self) -> *Vector* | Trả về bản sao mới | |
@@ -112,20 +112,20 @@ pyxelclec
 
 - <a name="WeakrefMethod"></a> Lớp <code>WeakrefMethod</code> : tham chiếu yếu đến các <i>bounded method</i> ( <code>weakref.WeakMethod</code>, xem thêm module <a href="https://docs.python.org/3/library/weakref.html">weakref</a> ). Một `WeakrefMethod` bị xem là "chết" nếu <i>bounded method</i> không còn vật chủ ( hoặc <code>\_\_call__</code> trả về <i>False</i> ).
 
-| Attribute và Method | Chức năng | Ghi chú |
+| Attributes và Methods | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
-| __weakref_bounded_method: `WeakMethod` | Tham chiếu yếu đến *bounded method* | |
-| **def** \_\_init__(self, `__bounded_method`: *Callable[[...], None]*) | Khởi tạo | *Lưu ý* : định dạng `callable` nhận vào là `def xxx(*args) -> None` |
-| **def** \_\_call__(self, *`args`) -> *bool* | Gọi đến *bounded method* nhận được lúc khởi tạo ( nếu vật chủ còn tồn tại ) | Trả về `False` nếu vật chủ bị thu gôm rác |
+| `__weakref_bounded_method`: `WeakMethod` | Tham chiếu yếu đến *bounded method* | |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self, `__bounded_method`: *Callable[[...], None]*) | Khởi tạo | *Lưu ý* : định dạng `callable` nhận vào là `def xxx(*args) -> None` |
+| **def** <span style="color:purple;"><strong>\_\_call__</strong></span>(self, *`args`) -> *bool* | Gọi đến *bounded method* nhận được lúc khởi tạo ( nếu vật chủ còn tồn tại ) | Trả về `False` nếu vật chủ bị thu gôm rác |
 
 ---
 
 - <a name="Delegate"></a> Lớp <code>Delegate</code> : lưu trữ nhiều `WeakrefMethod` trong một `set` ( lưu nhiều *bounded method* ), trong lúc gọi đến các *bounded method*, nếu phát hiện có `WeakrefMethod` đã "chết", xóa chúng khỏi tập lưu trữ.
 
-| Attribute và Method | Chức năng | Ghi chú |
+| Attributes và Methods | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
-| `_weakref_methods``: *Set[WeakrefMethod]* | Tập lưu trữ | |
-| **def** \_\_init__(self) | Khởi tạo | |
+| `_weakref_methods`: *Set[WeakrefMethod]* | Tập lưu trữ | |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self) | Khởi tạo | |
 | **def** add(self, `__weakref_bounded_method`: *WeakrefMethod*) | Thêm một `WeakrefMethod` vào tập lưu trữ | |
 | **def** call(self, *`args`) | Gọi đến toàn bộ *bounded method* mà nó lưu | Thực hiện cùng lúc "call" `WeakrefMethod` và kiểm tra, `WeakrefMethod` đã "chết" thì xóa nó khỏi tập lưu trữ. |
 
@@ -133,10 +133,10 @@ pyxelclec
 
 - <a name="VectorListener"></a> Lớp <code>VectorListener</code> : kế thừa từ <a href="#Vector">Vector</a>, hỗ trợ kích hoạt các hành động khi xảy ra sự thay đổi trên đó ( cụ thể là thay đổi giá trị <code>x, y</code> ).
 
-| Attribute và Method | Chức năng | Ghi chú |
+| Attributes và Methods | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
 | `__delegate`: *Delegate* | Lưu các hành động, sẽ kích hoạt khi sự thay đổi xảy ra | |
-| **def** \_\_init__(self, `__x`: *float*, `__y`: *float*) | Khởi tạo | Override |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self, `__x`: *float*, `__y`: *float*) | Khởi tạo | Override |
 | **def** setxy(self, `__x`: *float*, `__y`: *float*) | Thay đổi giá trị `x, y` | Override |
 | **def** add_listener(self, `__weakref_method`: WeakrefMethod) | Thêm một hành động | |
 | **def** only_set(self, `source`: *Vector*) | Thay đổi giá trị `x, y` mà không kích hoạt các hành động | |
@@ -147,12 +147,12 @@ pyxelclec
     - Nếu nó không tham chiếu đến `Vector` nào khác, chức năng của nó không khác `Vector` thông thường.
     - Những `Vector` mà nó có thể tham chiếu đến là `Vector, VectorListener, VectorDependent` ngoại trừ chính nó.
 
-| Attribute và Method | Chức năng | Ghi chú |
+| Attributes và Methods | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
 | `__ref_vector`: *Union[Vector, VectorListener, VectorDependent]* | Tham chiếu đến `Vector` khác | Tôi không tưởng tượng nổi chuyện gì sẽ xảy ra khi nó tham chiếu đến chính nó đâu 😧 |
 | `x`: *float* (get) | Giá trị tại trục `Ox` | Override |
 | `y`: *float* (get) | Giá trị tại trục `Oy` | Override |
-| **def** \_\_init__(self, `__x`: *float*, `__y`: *float*, `__ref_vector`: *Vector* = *None*) | Khởi tạo | Override |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self, `__x`: *float*, `__y`: *float*, `__ref_vector`: *Vector* = *None*) | Khởi tạo | Override |
 | **def** setxy(self, `__x`: *float*, `__y`: *float*) | Thay đổi giá trị `x, y` | Override |
 | **def** set_ref(self, `__ref_vector`: *Vector*) | Gán tham chiếu | Bạn chỉ nên gọi hàm này duy nhất một lần mỗi `instance` nếu chưa gán lúc khởi tạo |
 
@@ -174,7 +174,7 @@ pyxelclec
 
 - <a name="StructRect"></a> Lớp <code>StructRect</code> : là hình chữ nhật được xác định bởi `top left` và `width height`.
 
-| Attribute và Method | Chức năng | Ghi chú |
+| Attributes và Methods | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
 | `_position`: *Vector* | Vị trí `top left` | |
 | `_size`: *Vector* | Kích thước `width height` | |
@@ -192,16 +192,16 @@ pyxelclec
 | `midright`: *Vector* (get/set) | ... | |
 | `midx`: *float* (get/set) | Hoặc `midtop.x` | |
 | `midy`: *float* (get/set) | Hoặc `midleft.y` | |
-| **def** \_\_init__(self, `size`: *Vector*, position: *Vector* = *None*) | Khởi tạo | Nếu `position is None`, mặc định `topleft = Vector.zero()` |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self, `size`: *Vector*, position: *Vector* = *None*) | Khởi tạo | Nếu `position is None`, mặc định `topleft = Vector.zero()` |
 | **def** collide_point(self, `point`: *Vector*) -> *bool* | Kiểm tra `point` có nằm trên `StructRect` không ( bao gồm viền ) | |
 
 ---
 
 - <a name="Rect"></a> Lớp <code>Rect</code> : kế thừa từ <code>StructRect</code>, cho phép thêm các hành động khi có sự thay đổi trên vị trí hoặc kích thước của nó.
 
-| Attribute và Method | Chức năng | Ghi chú |
+| Attributes và Methods | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
-| **def** \_\_init__(self, `size`: *Vector*, `position`: *Vector* = *None*) | Khởi tạo | Override |
+| **def** <span style="color:purple;"><strong>\_\_init__</strong></span>(self, `size`: *Vector*, `position`: *Vector* = *None*) | Khởi tạo | Override |
 | **def** size_listener(self, `__listener`: *WeakrefMethod*) | Thêm hành động khi kích thước thay đổi | |
 | **def** pos_listener(self, `__listener`: *WeakrefMethod*) | Thêm hành động khi vị trí thay đổi | |
 | **def** only_set_size(self, `__size`: *Vector*) | Chỉ thay đổi kích thước, không kích hoạt hành động | |
