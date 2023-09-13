@@ -11,10 +11,10 @@ pyxelclec
 +----geo
 |       \   __init__.py
 |       \   fmath.py
-|       \   color.py
-|       \   fdraw.py
 |       \   fvector.py
 |       \   frect.py
+|       \   fdraw.py
+|       \   color.py
 |       \   imagine.py
 |
 +----model
@@ -45,4 +45,28 @@ pyxelclec
 \   scene.py
 ```
 
+<h1 align="center">📑 Giới thiệu <code>pyxelclec.geo</code> 📑</h1>
 
+### Module `fmath.py`
+
+- Updating ...
+
+### Module `fvector.py`
+
+- Updating ...
+
+### Module `frect.py`
+
+- Updating ...
+
+### Module `fdraw.py`
+
+- Updating ...
+
+### Module `color.py`
+
+- Updating ...
+
+### Module `imagine.py`
+
+- Updating ...
