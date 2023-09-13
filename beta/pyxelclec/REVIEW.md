@@ -78,6 +78,7 @@ pyxelclec
     - [WeakrefMethod](#WeakrefMethod)
     - [Delegate](#Delegate)
     - [VectorListener](#VectorListener)
+    - [VectorDependent](#VectorDependent)
 
 - <a name="Vector"></a> Lớp <code>Vector</code> : mô phỏng <code>vector</code> trong mặt phẳng ( hệ trục tọa độ <i>Oxy</i> ). Một <code>Vector</code> có thể được xem như một điểm, hoặc một hướng trong mặt phẳng.
 
@@ -131,6 +132,19 @@ pyxelclec
 | **def** setxy(self, `__x`: *float*, `__y`: *float*) | Thay đổi giá trị `x, y` | Override |
 | **def** add_listener(self, `__weakref_method`: WeakrefMethod) | Thêm một hành động | |
 | **def** only_set(self, `source`: *Vector*) | Thay đổi giá trị `x, y` mà không kích hoạt các hành động | |
+
+- <a name="VectorDependent"></a> Lớp <code>VectorDependent</code> : kế thừa từ <code>Vector</code>, <code>VectorDependend</code> phụ thuộc tương đối vào một <code>Vector</code> khác "một khoảng <code>Vector</code>". Nghĩa là khi nó cách "một khoảng" so với <code>Vector</code> mà nó tham chiếu đến, nếu <code>Vector</code> đó bị thay đổi, chính nó sẽ bị thay đổi và cách đúng "một khoảng" so với <code>Vector</code> đó.
+    - Nếu nó không tham chiếu đến `Vector` nào khác, chức năng của nó không khác `Vector` thông thường.
+    - Những `Vector` mà nó có thể tham chiếu đến là `Vector, VectorListener, VectorDependent` ngoại trừ chính nó.
+
+| Attribute và Method | Chức năng | Ghi chú |
+|:--------------|:---------:|:--------|
+| `__ref_vector`: *Union[Vector, VectorListener, VectorDependent]* | Tham chiếu đến `Vector` khác | Tôi không tưởng tượng nổi chuyện gì sẽ xảy ra khi nó tham chiếu đến chính nó đâu 😧 |
+| `x`: *float* (get) | Giá trị tại trục `Ox` | Override |
+| `y`: *float* (get) | Giá trị tại trục `Oy` | Override |
+| **def** \_\_init__(self, `__x`: *float*, `__y`: *float*, `__ref_vector`: *Vector* = *None*) | Khởi tạo | Override |
+| **def** setxy(self, `__x`: *float*, `__y`: *float*) | Thay đổi giá trị `x, y` | Override |
+| **def** set_ref(self, `__ref_vector`: *Vector*) | Gán tham chiếu | Bạn chỉ nên gọi hàm này duy nhất một lần mỗi `instance` nếu chưa gán lúc khởi tạo |
 
 </details>
 

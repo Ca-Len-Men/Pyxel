@@ -3,6 +3,76 @@ from .fmath import *
 from weakref import WeakMethod
 import random
 
+class WeakrefMethod:
+    """
+    - Lớp này lưu một 'weakref method'
+    -> Mục đích : khi một object cần được giải phóng, tránh việc còn giữ 'bounded method' khiến object vẫn tồn tại.
+    """
+
+    def __init__(self, __bounded_method):
+        self.__weakref_bounded_method = WeakMethod(__bounded_method)
+
+    def __call__(self, *args):
+        """
+        - Gọi đến 'bounded method' khi khởi tạo, truyền vào đó các tham số 'args'.
+        - Nếu object vẫn còn tồn tại, trả về True.
+        """
+
+        __callable = self.__weakref_bounded_method()
+        if __callable:
+            __callable(*args)
+        return __callable is not None
+
+class Delegate:
+    """
+    - Lớp này lưu nhiều 'WeakrefMethod'.
+    - Khi một 'WeakrefMethod' "chết" đi, nó xóa 'WeakrefMethod' đó ra khỏi tập lưu trữ.
+    """
+
+    def __init__(self):
+        self._weakref_methods = None  # type: ignore
+
+    def call(self, *args):
+        """
+        - Hàm này được gọi khi một "sự kiện/thay đổi" xảy ra,
+        nó gọi đến các "hành động" ( bounded method ) mà nó lưu trữ ( cùng tham số 'args' ).
+        - Nếu một "hành động" chết đi, xóa "hành động" đó khỏi tập lưu trữ.
+        """
+
+        if self._weakref_methods is None:
+            return
+
+        # Tạo thùng rác, lưu những "hành động chết"
+        recycle_bin = None
+
+        # Gọi đến các "hành động"
+        for __callable in self._weakref_methods:  # type: ignore
+            __alive = __callable(*args)
+
+            # "Hành động" này đã "chết"
+            if not __alive:
+                if recycle_bin is None:
+                    recycle_bin = set()
+                recycle_bin.add(__callable)
+
+        # Xóa những "hành động chết" ra khỏi tập lưu trữ
+        if recycle_bin:
+            self._weakref_methods -= recycle_bin
+
+    def add(self, __weakref_bounded_method):
+        """
+        - Thêm một "hành động" cho một "sự kiện".
+        """
+
+        assert isinstance(__weakref_bounded_method, WeakrefMethod), \
+            f"From {self.__class__.__name__}.add : " \
+            f"parameter type of '__weakref_bounded_method' must be <WeakrefMethod> !"
+
+        if self._weakref_methods is None:
+            self._weakref_methods = set()
+        self._weakref_methods.add(__weakref_bounded_method)
+
+
 class Vector:
     @classmethod
     def zero(cls):
@@ -33,8 +103,15 @@ class Vector:
     def __init__(self, __x, __y):
         self.__x = __x
         self.__y = __y
-    
+
+    # BASE
     def setxy(self, __x, __y):
+        """
+        - Phương thức dùng để thay đổi thuộc tính x, y của Vector.
+        - Mọi thay đổi trên thuộc tính x, y của Vector đều phải gọi qua phương thức này
+        -> Mục đích : ghi đè phương thức này ở các lớp con.
+        """
+
         self.__x = __x
         self.__y = __y
 
@@ -51,7 +128,7 @@ class Vector:
 
     @x.setter   # type: ignore
     def x(self, __x):
-        self.setxy(__x, self.__y)
+        self.setxy(__x, self.y)
 
     @property
     def y(self):
@@ -59,25 +136,25 @@ class Vector:
 
     @y.setter   # type: ignore
     def y(self, __y):
-        self.setxy(self.__x, __y)
+        self.setxy(self.x, __y)
 
     @property
     def angle(self):
-        return angle(self.__x, self.__y)
+        return angle(self.x, self.y)
 
     @angle.setter   # type: ignore
     def angle(self, __angle):
-        if relative_compare(self.__x, 0) and relative_compare(self.__y, 0):
+        if relative_compare(self.x, 0) and relative_compare(self.y, 0):
             raise ValueError(f"From {self.__class__.__name__}.angle : "
                              f"cannot determine the angle of vector (0, 0) !")
 
-        length = (self.__x * self.__x + self.__y * self.__y) ** .5
+        length = magnitude(self.x, self.y)
         __x, __y = vector(__angle)
         self.setxy(__x * length, __y * length)
 
     @property
     def tup(self):
-        return self.__x, self.__y
+        return self.x, self.y
 
     @tup.setter # type: ignore
     def tup(self, __tup):
@@ -85,24 +162,24 @@ class Vector:
 
     @property
     def tup_int(self):
-        return int(self.__x), int(self.__y)
+        return int(self.x), int(self.y)
 
     @tup_int.setter # type: ignore
     def tup_int(self, __tup_int):
         self.setxy(*__tup_int)
 
     def copy(self):
-        return Vector(self.__x, self.__y)
+        return Vector(self.x, self.y)
 
     def magnitude(self, other):
-        return distance(self.__x, self.__y, other.x, other.y)
+        return magnitude(self.x - other.x, self.y - other.y)
 
     def normalize(self):
-        distance = (self.__x * self.__x + self.__y * self.__y) ** .5
-        return Vector(self.__x / distance, self.__y / distance)
+        distance = magnitude(self.x, self.y)
+        return Vector(self.x / distance, self.y / distance)
 
     def lerp(self, target, delta):
-        __sub = Vector(target.x - self.__x, target.y - self.__y)
+        __sub = Vector(target.x - self.x, target.y - self.y)
         __sub_distance = (__sub.x * __sub.x + __sub.y * __sub.y) ** .5
 
         if delta > 0 and __sub_distance <= delta:
@@ -114,7 +191,7 @@ class Vector:
         return False
 
     def __str__(self):
-        return f'Vector({self.__x}, {self.__y})'
+        return f'Vector({self.x}, {self.y})'
 
     def __repr__(self):
         return self.__str__()
@@ -123,144 +200,159 @@ class Vector:
         return 2
 
     def __iter__(self):
-        yield self.__x
-        yield self.__y
+        yield self.x
+        yield self.y
 
     def __copy__(self):
         return self.copy()
 
     def __add__(self, other):
-        return Vector(self.__x + other.x, self.__y + other.y)
+        return Vector(self.x + other.x, self.y + other.y)
 
     def __iadd__(self, other):
-        self.setxy(self.__x + other.x, self.__y + other.y)
+        self.setxy(self.x + other.x, self.y + other.y)
         return self
 
     def __sub__(self, other):
-        return Vector(self.__x - other.x, self.__y - other.y)
+        return Vector(self.x - other.x, self.y - other.y)
 
     def __isub__(self, other):
-        self.setxy(self.__x - other.x, self.__y - other.y)
+        self.setxy(self.x - other.x, self.y - other.y)
         return self
 
     def __mul__(self, other):
         if isinstance(other, (Vector, tuple)):
-            return Vector(self.__x * other[0], self.__y * other[1])
+            return Vector(self.x * other[0], self.y * other[1])
         elif isinstance(other, (float, int)):
-            return Vector(self.__x * other, self.__y * other)
+            return Vector(self.x * other, self.y * other)
 
         raise TypeError(f'From {self.__class__.__name__}.__mul__ : '
                         f'type of parameter `other` must be <float, tuple or Vector> !')
 
     def __imul__(self, other):
         if isinstance(other, (tuple, Vector)):
-            self.setxy(self.__x * other[0], self.__y * other[1])
+            self.setxy(self.x * other[0], self.y * other[1])
         elif isinstance(other, (int, float)):
-            self.setxy(self.__x * other, self.__y * other)
+            self.setxy(self.x * other, self.y * other)
         else:
             raise TypeError(f'From {self.__class__.__name__}.__imul__ : '
                             f'type of parameter `other` must be <float, tuple, Vector> !')
         return self
 
     def __truediv__(self, val):
-        return Vector(self.__x / val, self.__y / val)
+        return Vector(self.x / val, self.y / val)
 
     def __itruediv__(self, val):
-        self.setxy(self.__x / val, self.__y / val)
+        self.setxy(self.x / val, self.y / val)
         return self
 
     def __floordiv__(self, val):
-        return Vector(self.__x // val, self.__y // val)
+        return Vector(self.x // val, self.y // val)
 
     def __ifloordiv__(self, val):
-        self.setxy(self.__x // val, self.__y // val)
+        self.setxy(self.x // val, self.y // val)
         return self
 
     def __abs__(self):
-        return Vector(abs(self.__x), abs(self.__y))
+        return Vector(abs(self.x), abs(self.y))
 
     def __bool__(self):
-        return not relative_compare(self.__x, 0) or not relative_compare(self.__y, 0)
+        return not relative_compare(self.x, 0) or not relative_compare(self.y, 0)
 
     def __eq__(self, other):
-        return relative_compare(self.__x, other.x) and relative_compare(self.__y, other.y)
+        return relative_compare(self.x, other.x) and relative_compare(self.y, other.y)
 
     def __ne__(self, other):
-        return not relative_compare(self.__x, other.x) or not relative_compare(self.__y, other.y)
+        return not relative_compare(self.x, other.x) or not relative_compare(self.y, other.y)
 
     def __neg__(self):
-        return Vector(-self.__x, -self.__y)
+        return Vector(-self.x, -self.y)
 
     def __float__(self):
-        return (self.__x * self.__x + self.__y * self.__y) ** .5
+        return magnitude(self.x, self.y)
 
     def __getitem__(self, i):
         if i == 0:
-            return self.__x
+            return self.x
         elif i == 1:
-            return self.__y
+            return self.y
         else:
             raise IndexError(f"From {self.__class__.__name__}.__getitem__ : "
                              f"Vector index out of range !")
 
     def __setitem__(self, i, value):
         if i == 0:
-            self.setxy(value, self.__y)
+            self.setxy(value, self.y)
         elif i == 1:
-            self.setxy(self.__x, value)
+            self.setxy(self.x, value)
         else:
             raise IndexError(f"From {self.__class__.__name__}.__getitem__ : "
                              f"Vector index out of range !")
 
-class WeakrefMethod:
-    def __init__(self, __bounded_method):
-        self.__weakref_bounded_method = WeakMethod(__bounded_method)
-
-    def __call__(self, *args):
-        __callable = self.__weakref_bounded_method()
-        if __callable:
-            __callable(*args)
-        return __callable is not None
-
-class Delegate:
-    def __init__(self):
-        self._weakref_methods = None    # type: ignore
-
-    def call(self, *args):
-        if self._weakref_methods is None:
-            return
-
-        recycle_bin = None
-        for __callable in self._weakref_methods:    # type: ignore
-            result = __callable(*args)
-            if not result:
-                if recycle_bin is None:
-                    recycle_bin = set()
-                recycle_bin.add(__callable)
-                
-        if recycle_bin:
-            self._weakref_methods -= recycle_bin
-
-    def add(self, __weakref_bounded_method):
-        # assert isinstance(__weakref_bounded_method, WeakrefMethod), \
-        #     f"From {self.__class__.__name__}.add : " \
-        #     f"parameter type of '__weakref_bounded_method' must be <WeakrefMethod> !"
-        
-        if self._weakref_methods is None:
-            self._weakref_methods = set()
-        self._weakref_methods.add(__weakref_bounded_method)
-
 class VectorListener(Vector):
+    """
+    - Vector này cho phép thực thi các hành động khi nó bị thay đổi ( x, y bị thay đổi ).
+    """
+
     def __init__(self, __x, __y):
         super().__init__(__x, __y)
         self.__delegate = Delegate()
 
-    def add_listener(self, __listener):
-        self.__delegate.add(__listener)
+    def add_listener(self, __weakref_method):
+        self.__delegate.add(__weakref_method)
 
+    # Override
     def setxy(self, __x, __y):
-        super().setxy(__x, __y)
+        Vector.setxy(self, __x, __y)
         self.__delegate.call(self.copy())
 
     def only_set(self, source):
-        super().setxy(*source)
+        """
+        - Hàm này thay đổi x, y mà không gọi đến các hành động.
+        """
+
+        Vector.setxy(self, *source)
+
+class VectorDependent(Vector):
+    """
+    - VectorDependent phụ thuộc tương đối vào một Vector khác, nghĩa là
+    nó cách một Vector mà nó tham chiếu tới "một khoảng Vector".
+    - Nếu nó không được tham chiếu đến Vector khác, mọi hành động đều như Vector thông thường.
+    - (*) Sẽ có sai sót nếu chỉ chính nó tham chiếu đến Vector đó.
+    """
+
+    def __init__(self, __x, __y, __ref_vector=None):
+        super().__init__(__x, __y)
+        self.__ref_vector = __ref_vector
+
+    # Override
+    def setxy(self, __x, __y):
+        # Không có tham chiếu
+        if self.__ref_vector is None:
+            Vector.setxy(self, __x, __y)
+            return
+
+        # Chính nó sẽ là "một khoảng Vector"
+        # Lấy điểm cần "set" trừ đi Vector được tham chiếu
+        Vector.setxy(self, __x - self.__ref_vector.x, __y - self.__ref_vector.y)
+
+    def set_ref(self, __ref_vector):
+        self.__ref_vector = __ref_vector
+
+    # Override
+    @property
+    def x(self):
+        __x = Vector.x.fget(self)
+        # Không có tham chiếu
+        if self.__ref_vector is None:
+            return __x
+        return self.__ref_vector.x + __x
+
+    # Override
+    @property
+    def y(self):
+        __y = Vector.y.fget(self)
+        # Không có tham chiếu
+        if self.__ref_vector is None:
+            return __y
+        return self.__ref_vector.y + __y
