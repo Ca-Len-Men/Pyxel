@@ -70,9 +70,36 @@ pyxelclec
 
 ---
 
-### Module `fvector.py`
+<details>
+<summary><a name="fvector.py"></a><h3>Module <code>fvector.py</code></h3></summary>
 
-- Updating ...
+- Lớp `Vector` : mô phỏng `vector` trong mặt phẳng ( hệ trục tọa độ `Oxy` ).
+
+| Attributes | Chức năng | Ghi chú |
+|:--------------|:---------:|:--------|
+| `__x`: *float* | Giá trị tại trục `Ox` | |
+| `__y`: *float* | Giá trị tại trục `Oy` | |
+| `x`: *float* (get/set) | Giá trị tại trục `Ox` | |
+| `y`: *float* (get/set) | Giá trị tại trục `Oy` | |
+| `angle`: *float* (get/set) | Góc của `Vector` ( `degrees` ) | Giá trị luôn nằm trong đoạn `[0, 360]` |
+| `tup`: *Tuple[float, float]* (get/set) | `Vector` có kiểu `tuple` | |
+| `tup_int`: *Tuple[int, int]* (get) | `Vector` *nguyên* có kiểu `tuple` | |
+
+- Hỗ trợ các phương thức tính toán với `Vector`.
+
+| Method | Chức năng | Ghi chú |
+|:--------------|:---------:|:--------|
+| **def** \__init__(self, `x`: *float*, `y`: *float*) | Khởi tạo `Vector` | |
+| **def** setxy(self, `__x`: *float*, `__y`: *float*) -> None | Gán thuộc tính `x, y` | **Đáng chú ý** : mọi thay đổi trên `x, y` đều phải được thông qua hàm này ( bao gồm **set property** ) ! |
+| **def** set(self, `source`: *Union[Tuple[float, float], List[float], Vector]*) -> None | Gán thuộc tính `x, y` | |
+| **def** copy(self) -> *Vector* | Trả về bản sao mới | |
+| **def** magnitude(self, `other`: *Vector*) -> *float* | Khoảng cách giữa hai `Vector` | |
+| **def** normalize(self) -> *Vector* | Trả về `Vector` mới cùng hướng ( góc bằng nhau ) nhưng độ dài bằng `1` | |
+| **def** lerp(self, `target`: *Vector*, `delta`: *float*) -> bool | Tịnh tiến đến `target` một khoảng `delta` | |
+
+</details>
+
+---
 
 ### Module `frect.py`
 
