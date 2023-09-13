@@ -80,6 +80,8 @@ pyxelclec
     - [VectorListener](#VectorListener)
     - [VectorDependent](#VectorDependent)
 
+---
+
 - <a name="Vector"></a> Lớp <code>Vector</code> : mô phỏng <code>vector</code> trong mặt phẳng ( hệ trục tọa độ <i>Oxy</i> ). Một <code>Vector</code> có thể được xem như một điểm, hoặc một hướng trong mặt phẳng.
 
 | Attributes | Chức năng | Ghi chú |
@@ -106,6 +108,8 @@ pyxelclec
 | `__add__`, `__iadd__`, `__sub__`, `__isub__`, `__mul__`, `__imul__`, `__truediv__`, `__itruediv__`, `__floordiv__`, `__ifloordiv__`, `__abs__`, `__eq__`, `__ne__`, `__neg__`, `__getitem__`, `__setitem__` | Sử dụng phương thức bằng toán tử | |
 | `__init__`, `__str__`, `__repr__`, `__copy__`, `__len__`, `__iter__`, `__float__`, `__bool__` | Dunder method | |
 
+---
+
 - <a name="WeakrefMethod"></a> Lớp <code>WeakrefMethod</code> : tham chiếu yếu đến các <i>bounded method</i> ( <code>weakref.WeakMethod</code>, xem thêm module <a href="https://docs.python.org/3/library/weakref.html">weakref</a> ). Một `WeakrefMethod` bị xem là "chết" nếu <i>bounded method</i> không còn vật chủ ( hoặc <code>\_\_call__</code> trả về <i>False</i> ).
 
 | Attribute và Method | Chức năng | Ghi chú |
@@ -113,6 +117,8 @@ pyxelclec
 | __weakref_bounded_method: `WeakMethod` | Tham chiếu yếu đến *bounded method* | |
 | **def** \_\_init__(self, `__bounded_method`: *Callable[[...], None]*) | Khởi tạo | *Lưu ý* : định dạng `callable` nhận vào là `def xxx(*args) -> None` |
 | **def** \_\_call__(self, *`args`) -> *bool* | Gọi đến *bounded method* nhận được lúc khởi tạo ( nếu vật chủ còn tồn tại ) | Trả về `False` nếu vật chủ bị thu gôm rác |
+
+---
 
 - <a name="Delegate"></a> Lớp <code>Delegate</code> : lưu trữ nhiều `WeakrefMethod` trong một `set` ( lưu nhiều *bounded method* ), trong lúc gọi đến các *bounded method*, nếu phát hiện có `WeakrefMethod` đã "chết", xóa chúng khỏi tập lưu trữ.
 
@@ -123,6 +129,8 @@ pyxelclec
 | **def** add(self, `__weakref_bounded_method`: *WeakrefMethod*) | Thêm một `WeakrefMethod` vào tập lưu trữ | |
 | **def** call(self, *`args`) | Gọi đến toàn bộ *bounded method* mà nó lưu | Thực hiện cùng lúc "call" `WeakrefMethod` và kiểm tra, `WeakrefMethod` đã "chết" thì xóa nó khỏi tập lưu trữ. |
 
+---
+
 - <a name="VectorListener"></a> Lớp <code>VectorListener</code> : kế thừa từ <a href="#Vector">Vector</a>, hỗ trợ kích hoạt các hành động khi xảy ra sự thay đổi trên đó ( cụ thể là thay đổi giá trị <code>x, y</code> ).
 
 | Attribute và Method | Chức năng | Ghi chú |
@@ -132,6 +140,8 @@ pyxelclec
 | **def** setxy(self, `__x`: *float*, `__y`: *float*) | Thay đổi giá trị `x, y` | Override |
 | **def** add_listener(self, `__weakref_method`: WeakrefMethod) | Thêm một hành động | |
 | **def** only_set(self, `source`: *Vector*) | Thay đổi giá trị `x, y` mà không kích hoạt các hành động | |
+
+---
 
 - <a name="VectorDependent"></a> Lớp <code>VectorDependent</code> : kế thừa từ <code>Vector</code>, <code>VectorDependend</code> phụ thuộc tương đối vào một <code>Vector</code> khác "một khoảng <code>Vector</code>". Nghĩa là khi nó cách "một khoảng" so với <code>Vector</code> mà nó tham chiếu đến, nếu <code>Vector</code> đó bị thay đổi, chính nó sẽ bị thay đổi và cách đúng "một khoảng" so với <code>Vector</code> đó.
     - Nếu nó không tham chiếu đến `Vector` nào khác, chức năng của nó không khác `Vector` thông thường.
