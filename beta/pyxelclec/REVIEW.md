@@ -73,7 +73,13 @@ pyxelclec
 <details>
 <summary><a name="fvector.py"></a><h3>Module <code>fvector.py</code></h3></summary>
 
-- <a name="Vector"></a> Lớp <code>Vector</code> : mô phỏng <code>vector</code> trong mặt phẳng ( hệ trục tọa độ <i>Oxy</i> ).
+- Module `fvector` chủ yếu xây dựng `Vector` trong mặt phẳng để ứng dụng trong trò chơi, gồm các lớp cần thiết sau :
+    - [Vector](#Vector)
+    - [WeakrefMethod](#WeakrefMethod)
+    - [Delegate](#Delegate)
+    - [VectorListener](#VectorListener)
+
+- <a name="Vector"></a> Lớp <code>Vector</code> : mô phỏng <code>vector</code> trong mặt phẳng ( hệ trục tọa độ <i>Oxy</i> ). Một <code>Vector</code> có thể được xem như một điểm, hoặc một hướng trong mặt phẳng.
 
 | Attributes | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
@@ -90,8 +96,8 @@ pyxelclec
 | Method | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
 | **def** \_\_init__(self, `x`: *float*, `y`: *float*) | Khởi tạo `Vector` | |
-| **def** setxy(self, `__x`: *float*, `__y`: *float*) -> None | Gán thuộc tính `x, y` | **Đáng chú ý** : mọi thay đổi trên `x, y` đều phải được thông qua hàm này ( bao gồm **set property** ) ! |
-| **def** set(self, `source`: *Union[Tuple[float, float], List[float], Vector]*) -> None | Gán thuộc tính `x, y` | |
+| **def** setxy(self, `__x`: *float*, `__y`: *float*) | Gán thuộc tính `x, y` | **Đáng chú ý** : mọi thay đổi trên `x, y` đều phải được thông qua hàm này ( bao gồm **set property** ) ! |
+| **def** set(self, `source`: *Union[Tuple[float, float], List[float], Vector]*) | Gán thuộc tính `x, y` | |
 | **def** copy(self) -> *Vector* | Trả về bản sao mới | |
 | **def** magnitude(self, `other`: *Vector*) -> *float* | Khoảng cách giữa hai `Vector` | |
 | **def** normalize(self) -> *Vector* | Trả về `Vector` mới cùng hướng ( góc bằng nhau ) nhưng độ dài bằng `1` | |
@@ -99,7 +105,7 @@ pyxelclec
 | `__add__`, `__iadd__`, `__sub__`, `__isub__`, `__mul__`, `__imul__`, `__truediv__`, `__itruediv__`, `__floordiv__`, `__ifloordiv__`, `__abs__`, `__eq__`, `__ne__`, `__neg__`, `__getitem__`, `__setitem__` | Sử dụng phương thức bằng toán tử | |
 | `__init__`, `__str__`, `__repr__`, `__copy__`, `__len__`, `__iter__`, `__float__`, `__bool__` | Dunder method | |
 
-- <a name="WeakrefMethod"></a> Lớp <code>WeakrefMethod</code> : tham chiếu yếu đến các <i>bounded method</i> ( <code>weakref.WeakMethod</code>, xem thêm module <a href="https://docs.python.org/3/library/weakref.html">weakref</a> ). Một `WeakrefMethod` bị xem là "chết" nếu <i>bounded method</i> không còn vật chủ ( hoặc <code>__call__</code> trả về <i>False</i> ).
+- <a name="WeakrefMethod"></a> Lớp <code>WeakrefMethod</code> : tham chiếu yếu đến các <i>bounded method</i> ( <code>weakref.WeakMethod</code>, xem thêm module <a href="https://docs.python.org/3/library/weakref.html">weakref</a> ). Một `WeakrefMethod` bị xem là "chết" nếu <i>bounded method</i> không còn vật chủ ( hoặc <code>\_\_call__</code> trả về <i>False</i> ).
 
 | Attribute và Method | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
@@ -107,14 +113,24 @@ pyxelclec
 | **def** \_\_init__(self, `__bounded_method`: *Callable[[...], None]*) | Khởi tạo | *Lưu ý* : định dạng `callable` nhận vào là `def xxx(*args) -> None` |
 | **def** \_\_call__(self, *`args`) -> *bool* | Gọi đến *bounded method* nhận được lúc khởi tạo ( nếu vật chủ còn tồn tại ) | Trả về `False` nếu vật chủ bị thu gôm rác |
 
-- <a name="Delegate"></a> Lớp <code>Delegate</code> : lưu trữ nhiều `WeakrefMethod` trong một `set` ( lưu nhiều *bounded method* ), trong lúc gọi đến các *bounded method*, nếu phát hiện có `WeakrefMethod` bị "chết", xóa chúng khỏi tập lưu trữ.
+- <a name="Delegate"></a> Lớp <code>Delegate</code> : lưu trữ nhiều `WeakrefMethod` trong một `set` ( lưu nhiều *bounded method* ), trong lúc gọi đến các *bounded method*, nếu phát hiện có `WeakrefMethod` đã "chết", xóa chúng khỏi tập lưu trữ.
 
 | Attribute và Method | Chức năng | Ghi chú |
 |:--------------|:---------:|:--------|
 | `_weakref_methods``: *Set[WeakrefMethod]* | Tập lưu trữ | |
 | **def** \_\_init__(self) | Khởi tạo | |
-| **def** add(self, `__weakref_bounded_method`: *WeakrefMethod*) -> None | Thêm một `WeakrefMethod` vào tập lưu trữ | |
-| **def** call(self, *`args`) -> *None* | Gọi đến toàn bộ *bounded method* mà nó lưu | Thực hiện cùng lúc "call" `WeakrefMethod` và kiểm tra, `WeakrefMethod` đã "chết" thì xóa nó khỏi tập lưu trữ. |
+| **def** add(self, `__weakref_bounded_method`: *WeakrefMethod*) | Thêm một `WeakrefMethod` vào tập lưu trữ | |
+| **def** call(self, *`args`) | Gọi đến toàn bộ *bounded method* mà nó lưu | Thực hiện cùng lúc "call" `WeakrefMethod` và kiểm tra, `WeakrefMethod` đã "chết" thì xóa nó khỏi tập lưu trữ. |
+
+- <a name="VectorListener"></a> Lớp <code>VectorListener</code> : kế thừa từ <a href="#Vector">Vector</a>, hỗ trợ kích hoạt các hành động khi xảy ra sự thay đổi trên đó ( cụ thể là thay đổi giá trị <code>x, y</code> ).
+
+| Attribute và Method | Chức năng | Ghi chú |
+|:--------------|:---------:|:--------|
+| `__delegate`: *Delegate* | Lưu các hành động, sẽ kích hoạt khi sự thay đổi xảy ra | |
+| **def** \_\_init__(self, `__x`: *float*, `__y`: *float*) | Khởi tạo | Override |
+| **def** setxy(self, `__x`: *float*, `__y`: *float*) | Thay đổi giá trị `x, y` | Override |
+| **def** add_listener(self, `__weakref_method`: WeakrefMethod) | Thêm một hành động | |
+| **def** only_set(self, `source`: *Vector*) | Thay đổi giá trị `x, y` mà không kích hoạt các hành động | |
 
 </details>
 
