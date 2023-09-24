@@ -8,11 +8,12 @@
 
 ```
 pyxelclec
-+----geo
++----struct
 |       \   __init__.py
-|       \   fmath.py
-|       \   fvector.py
-|       \   frect.py
+|       \   pmath.py
+|       \   pdelegate.py
+|       \   pvector.py
+|       \   prect.py
 |       \   fdraw.py
 |       \   color.py
 |       \   imagine.py
@@ -47,10 +48,10 @@ pyxelclec
 
 ---
 
-<h1 align="center"><a name="pyxelclec.geo"></a>📑 Giới thiệu <code>pyxelclec.geo</code> 📑</h1>
+<h1 align="center"><a name="pyxel.geo"></a>📑 Giới thiệu <code>pyxel.struct</code> 📑</h1>
 
 <details>
-<summary><a name="fmath.py"></a><h3>Module <code>fmath.py</code></h3></summary>
+<summary><a name="pmath.py"></a><h3>Module <code>pmath.py</code></h3></summary>
 
 - Triển khai các hàm toán học cơ bản :
 
@@ -71,9 +72,9 @@ pyxelclec
 ---
 
 <details>
-<summary><a name="fvector.py"></a><h3>Module <code>fvector.py</code></h3></summary>
+<summary><a name="pvector.py"></a><h3>Module <code>pvector.py</code></h3></summary>
 
-- Module `fvector` chủ yếu xây dựng `Vector` trong mặt phẳng để ứng dụng trong trò chơi, gồm các lớp cần thiết sau :
+- Module `pvector` chủ yếu xây dựng `Vector` trong mặt phẳng để ứng dụng trong trò chơi, gồm các lớp cần thiết sau :
     - [Vector](#Vector)
     - [WeakrefMethod](#WeakrefMethod)
     - [Delegate](#Delegate)
@@ -162,9 +163,9 @@ pyxelclec
 
 
 <details>
-<summary><a name="frect.py"></a><h3>Module <code>frect.py</code></h3></summary>
+<summary><a name="prect.py"></a><h3>Module <code>prect.py</code></h3></summary>
 
-- Module `frect` chủ yếu mô phỏng hình chữ nhật trong mặt phẳng ( hệ tọa độ `Oxy` ).
+- Module `prect` chủ yếu mô phỏng hình chữ nhật trong mặt phẳng ( hệ tọa độ `Oxy` ).
 - Hình chữ nhật được xác định bằng vị trí `top left` ( là góc dưới bên trái trong hệ tọa độ `Oxy`, hoặc góc trên bên trái đối với màn hình ứng dụng ) và kích thước `width height` ( chiều ngang và chiều dọc ).
 - Thường dùng để căn chỉnh vị trí phù hợp, xác định va chạm, ... :
     - [StructRect](#StructRect)

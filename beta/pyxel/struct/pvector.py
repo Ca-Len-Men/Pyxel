@@ -1,77 +1,15 @@
-from .fmath import *
+# /**************************************************************************/
+# /*  pvector.py                                                            */
+# /**************************************************************************/
+# /*                         This file is part of:                          */
+# /*                                 PYXEL                                  */
+# /*                  https://github.com/Ca-Len-Men/Pyxel                   */
+# /**************************************************************************/
 
-from weakref import WeakMethod
+from pyxel.struct.pmath import *
+from pyxel.struct.pdelegate import Delegate
+
 import random
-
-class WeakrefMethod:
-    """
-    - Lớp này lưu một 'weakref method'
-    -> Mục đích : khi một object cần được giải phóng, tránh việc còn giữ 'bounded method' khiến object vẫn tồn tại.
-    """
-
-    def __init__(self, __bounded_method):
-        self.__weakref_bounded_method = WeakMethod(__bounded_method)
-
-    def __call__(self, *args):
-        """
-        - Gọi đến 'bounded method' khi khởi tạo, truyền vào đó các tham số 'args'.
-        - Nếu object vẫn còn tồn tại, trả về True.
-        """
-
-        __callable = self.__weakref_bounded_method()
-        if __callable:
-            __callable(*args)
-        return __callable is not None
-
-class Delegate:
-    """
-    - Lớp này lưu nhiều 'WeakrefMethod'.
-    - Khi một 'WeakrefMethod' "chết" đi, nó xóa 'WeakrefMethod' đó ra khỏi tập lưu trữ.
-    """
-
-    def __init__(self):
-        self._weakref_methods = None  # type: ignore
-
-    def call(self, *args):
-        """
-        - Hàm này được gọi khi một "sự kiện/thay đổi" xảy ra,
-        nó gọi đến các "hành động" ( bounded method ) mà nó lưu trữ ( cùng tham số 'args' ).
-        - Nếu một "hành động" chết đi, xóa "hành động" đó khỏi tập lưu trữ.
-        """
-
-        if self._weakref_methods is None:
-            return
-
-        # Tạo thùng rác, lưu những "hành động chết"
-        recycle_bin = None
-
-        # Gọi đến các "hành động"
-        for __callable in self._weakref_methods:  # type: ignore
-            __alive = __callable(*args)
-
-            # "Hành động" này đã "chết"
-            if not __alive:
-                if recycle_bin is None:
-                    recycle_bin = set()
-                recycle_bin.add(__callable)
-
-        # Xóa những "hành động chết" ra khỏi tập lưu trữ
-        if recycle_bin:
-            self._weakref_methods -= recycle_bin
-
-    def add(self, __weakref_bounded_method):
-        """
-        - Thêm một "hành động" cho một "sự kiện".
-        """
-
-        assert isinstance(__weakref_bounded_method, WeakrefMethod), \
-            f"From {self.__class__.__name__}.add : " \
-            f"parameter type of '__weakref_bounded_method' must be <WeakrefMethod> !"
-
-        if self._weakref_methods is None:
-            self._weakref_methods = set()
-        self._weakref_methods.add(__weakref_bounded_method)
-
 
 class Vector:
     @classmethod
@@ -79,30 +17,33 @@ class Vector:
         return cls(0, 0)
 
     @classmethod
-    def left(cls):
-        return cls(-1, 0)
+    def left(cls, length=1):
+        return cls(-length, 0)
 
     @classmethod
-    def right(cls):
-        return cls(1, 0)
+    def right(cls, length=1):
+        return cls(length, 0)
 
     @classmethod
-    def up(cls):
-        return cls(0, -1)
+    def up(cls, length=1):
+        return cls(0, -length)
 
     @classmethod
-    def down(cls):
-        return cls(0, 1)
+    def down(cls, length=1):
+        return cls(0, length)
 
     @classmethod
-    def random(cls):
+    def random(cls, length=1):
         x = random.random()
         y = 1 - x * x
+        x *= length
+        y *= length
         return cls(x, y) if random.randint(0, 1) else cls(x, -y)
 
-    def __init__(self, __x, __y):
+    def __init__(self, __x: float, __y: float):
         self.__x = __x
         self.__y = __y
+        self.__delegate = None
 
     # BASE
     def setxy(self, __x, __y):
@@ -114,6 +55,13 @@ class Vector:
 
         self.__x = __x
         self.__y = __y
+        self.__delegate.call(self)
+
+    @property
+    def delegate(self):
+        if self.__delegate is None:
+            self.__delegate = Delegate()
+        return self.__delegate
 
     def set(self, source):
         if isinstance(source, (Vector, tuple, list)):
@@ -140,16 +88,16 @@ class Vector:
 
     @property
     def angle(self):
-        return angle(self.x, self.y)
+        return angle_of_vector(self.x, self.y)
 
     @angle.setter   # type: ignore
-    def angle(self, __angle):
-        if relative_compare(self.x, 0) and relative_compare(self.y, 0):
+    def angle(self, __angle: float):
+        if self.x is 0 and self.y is 0:
             raise ValueError(f"From {self.__class__.__name__}.angle : "
                              f"cannot determine the angle of vector (0, 0) !")
 
         length = magnitude(self.x, self.y)
-        __x, __y = vector(__angle)
+        __x, __y = vector_from_degree(__angle)
         self.setxy(__x * length, __y * length)
 
     @property
@@ -178,7 +126,7 @@ class Vector:
         distance = magnitude(self.x, self.y)
         return Vector(self.x / distance, self.y / distance)
 
-    def lerp(self, target, delta):
+    def lerp(self, target, delta: float):
         __sub = Vector(target.x - self.x, target.y - self.y)
         __sub_distance = (__sub.x * __sub.x + __sub.y * __sub.y) ** .5
 
@@ -257,13 +205,13 @@ class Vector:
         return Vector(abs(self.x), abs(self.y))
 
     def __bool__(self):
-        return not relative_compare(self.x, 0) or not relative_compare(self.y, 0)
+        return not approximate_compare(self.x, 0) or not approximate_compare(self.y, 0)
 
     def __eq__(self, other):
-        return relative_compare(self.x, other.x) and relative_compare(self.y, other.y)
+        return approximate_compare(self.x, other.x) and approximate_compare(self.y, other.y)
 
     def __ne__(self, other):
-        return not relative_compare(self.x, other.x) or not relative_compare(self.y, other.y)
+        return not approximate_compare(self.x, other.x) or not approximate_compare(self.y, other.y)
 
     def __neg__(self):
         return Vector(-self.x, -self.y)
@@ -289,30 +237,6 @@ class Vector:
             raise IndexError(f"From {self.__class__.__name__}.__getitem__ : "
                              f"Vector index out of range !")
 
-class VectorListener(Vector):
-    """
-    - Vector này cho phép thực thi các hành động khi nó bị thay đổi ( x, y bị thay đổi ).
-    """
-
-    def __init__(self, __x, __y):
-        super().__init__(__x, __y)
-        self.__delegate = Delegate()
-
-    def add_listener(self, __weakref_method):
-        self.__delegate.add(__weakref_method)
-
-    # Override
-    def setxy(self, __x, __y):
-        Vector.setxy(self, __x, __y)
-        self.__delegate.call(self.copy())
-
-    def only_set(self, source):
-        """
-        - Hàm này thay đổi x, y mà không gọi đến các hành động.
-        """
-
-        Vector.setxy(self, *source)
-
 class VectorDependent(Vector):
     """
     - VectorDependent phụ thuộc tương đối vào một Vector khác, nghĩa là
@@ -321,9 +245,9 @@ class VectorDependent(Vector):
     - (*) Sẽ có sai sót nếu chỉ chính nó tham chiếu đến Vector đó.
     """
 
-    def __init__(self, __x, __y, __ref_vector=None):
+    def __init__(self, __x, __y):
         super().__init__(__x, __y)
-        self.__ref_vector = __ref_vector
+        self.__ref_vector = None
 
     # Override
     def setxy(self, __x, __y):
@@ -332,15 +256,23 @@ class VectorDependent(Vector):
             Vector.setxy(self, __x, __y)
             return
 
-        # Chính nó sẽ là "một khoảng Vector"
-        # Lấy điểm cần "set" trừ đi Vector được tham chiếu
+        # `self` sẽ là "một khoảng Vector"
+        # Lấy điểm cần "set" trừ đi `ref_vector`
         Vector.setxy(self, __x - self.__ref_vector.x, __y - self.__ref_vector.y)
 
-    def set_ref(self, __ref_vector):
+    def __event_refvector_changed(self, sender: Vector):
+        """ Khi vector tham chiếu thay đổi, chính nó cũng đã thay đổi -> call ``Delegate``
+
+        :param sender: vector tham chiếu ``__ref_vector``"""
+        self.delegate.call(self)
+
+    def set_ref(self, __ref_vector: Vector):
+        __ref_vector.delegate.add(self, VectorDependent.__event_refvector_changed)
         self.__ref_vector = __ref_vector
 
+
     # Override
-    @property
+    @Vector.x.fget
     def x(self):
         __x = Vector.x.fget(self)
         # Không có tham chiếu
@@ -349,7 +281,7 @@ class VectorDependent(Vector):
         return self.__ref_vector.x + __x
 
     # Override
-    @property
+    @Vector.y.fget
     def y(self):
         __y = Vector.y.fget(self)
         # Không có tham chiếu

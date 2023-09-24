@@ -4,13 +4,13 @@
 <img align="right" width="256px" height="256px" src="Assets/snakes.png">
 
 ### Về thư viện `PYXEL`
-- `PYXEL` là thư viện <u>mã nguồn mở</u> được xây dựng dựa trên `Pygame`, dưới tinh thần lắng nghe ý kiến người dùng, hợp tác và cùng phát triển.
-- `PYXEL` cung cấp nhiều tiện ích, tính năng cho phát triển trò chơi 2D :
-	- Dễ dàng cho người mới học.
-	- Cung cấp các mẫu đồ họa đẹp mắt.
-	- Hỗ trợ tận tình cho người dùng từ A đến Z.
+- `PYXEL` là thư viện <u>mã nguồn mở</u> được xây dựng dựa trên `Pygame`, hoạt động trên tinh thần lắng nghe ý kiến người dùng, hợp tác và cùng phát triển.
+- `PYXEL` mong muốn cung cấp nhiều tiện ích, tính năng cho phát triển trò chơi 2D với lập trình viên :
+	- Dễ dàng sử dụng cho người mới học.
+	- Cung cấp các mẫu điều khiển đẹp mắt.
+	- Hỗ trợ tận tình cho lập trình viên từ A đến Z khi nhận được phản hồi.
 - Thông tin đến các ***cộng tác viên*** :
-	- Chi tiết về `pyxelclec` : [REVIEW.md](beta/pyxelclec/REVIEW.md)
+	- Chi tiết về `pyxel` : [REVIEW.md](beta/pyxel/REVIEW.md)
 	- Chi tiết về `cyxelclec` : Updating...
 
 ### Trước khi bắt đầu, `PYXEL` yêu cầu bạn :
