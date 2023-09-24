@@ -18,7 +18,7 @@
 * Bạn hãy lựa chọn một trong hai gói sau để tải về :
 	- Phiên bản Pure Python : ~~chưa hoàn thành~~ ...
 	- Phiên bản Cython		: ~~chưa hoàn thành~~ ...
-	- <b>Lưu ý</b> : đối với phiên bản Cython, `PYXEL` đòi bạn cài thêm gói `Cython` và thực thi tệp `setup.py` mới có thể xử dụng.
+	- <b>Lưu ý</b> : đối với phiên bản Cython, `PYXEL` đòi bạn cài thêm gói `Cython` và thực thi tệp `setup.py` mới có thể sử dụng.
 
 ## <h1 align="center">⛓️ Mô hình Canvas Layer - Entity - Component ⛓️</h1>
 
