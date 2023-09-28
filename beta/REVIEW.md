@@ -2,7 +2,8 @@
 
 
 <h1 align="center">🎮 Giới thiệu sơ đồ 🎮</h1>
-<img align="right" width="256px" height="256px" src="../../Assets/code-review.png">
+<img align="right" width="256px" height="256px" src="https://github.com/Ca-Len-Men/Pyxel/assets/88229844/24c9b081-d26f-4d84-8c43-f34a5018d2b5">
+
 
 ### Cây thư mục dự án
 
