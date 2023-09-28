@@ -98,3 +98,9 @@ if __name__ == '__main__':
     scene_controller.run()
 
 ```
+
+<h4 align="center">Kết quả</h4>
+<p align="center">
+<img width="800px" height="550px" src="https://github.com/Ca-Len-Men/Pyxel/assets/88229844/ba6ab374-c084-4bd6-97ae-8b8b33a74750">
+</p>
+
