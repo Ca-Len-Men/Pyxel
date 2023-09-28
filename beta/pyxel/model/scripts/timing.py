@@ -6,10 +6,10 @@
 # /*                  https://github.com/Ca-Len-Men/Pyxel                   */
 # /**************************************************************************/
 
-from pyxel.struct.pcolor import *
 from pyxel.struct.processor_surface import *
 from pyxel.model.components.script import ComponentScript
 from pyxel.model.components.sprite import CSprite, CLabel
+from pyxel.model.entity import Entity
 from pyxel.model.base import app
 
 class TimeInterval(ComponentScript):
@@ -32,7 +32,9 @@ class TimeInterval(ComponentScript):
             self.tick = False
 
 class FPSDisplay(ComponentScript):
-    def __init__(self, entity, **kwargs):
+    def __init__(self, *, entity=None, **kwargs):
+        if entity is None:
+            entity = Entity()
         self._label = CLabel(text='FPS : 60', color=Chocolate, enhance_opacity=2)
         self._sprite_rounded = CSprite()
         self._time_interval = TimeInterval(entity, 1)
