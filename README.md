@@ -1,7 +1,7 @@
 <h1 align="center">🐍 PYXEL 1.0.0 🐍</h1>
 
 <h1 align="center">🎮 Giới thiệu 🎮</h1>
-<img align="right" width="256px" height="256px" src="Assets/snakes.png">
+<img align="right" width="256px" height="256px" src="https://github.com/Ca-Len-Men/Pyxel/assets/88229844/e1bbdbd5-18ee-41e7-9994-b0d958d089c5">
 
 ### Về thư viện `PYXEL`
 - `PYXEL` là thư viện <u>mã nguồn mở</u> được xây dựng dựa trên `Pygame`, hoạt động trên tinh thần lắng nghe ý kiến người dùng, hợp tác và cùng phát triển.
