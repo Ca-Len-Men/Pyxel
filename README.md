@@ -27,8 +27,8 @@
 <details>
 <summary><h3>Đối tượng <code>Canvas</code></h3></summary>
 
-- Là khu vực dùng để hiển thị các đối tượng bên trong nó ( hãy xem nó như một màn hình, các đối tượng bên trong không thể được hiển thị ra bên ngoài màn hình ).
-- Chúng ta sẽ đặt ra các quy tắc để dễ dàng làm việc với nhau :
+- Là một màn hình hiển thị, hoặc một form xử lí, dùng hiển thị mọi thứ bên trong nó : gameobject, controls, video, etc ...
+- Tính năng :
 	- [PYXEL1](#PYXEL1) : Một `Canvas` có thể chứa nhiều `Canvas` khác.
 	- [PYXEL2](#PYXEL2) : Dựa vào `PYXEL1`, ta có một <u>cây</u> gồm các nút là các `Canvas`, với nút gốc ( `root` ) chính là toàn màn hình của ứng dụng.
 </details>
@@ -38,7 +38,9 @@
 <details>
 <summary><h3>Đối tượng <code>Entity</code></h3></summary>
 
-- Là "định danh" cho một "thực thể" bên trong trò chơi :
+- Là một thực thể, hoặc đối tượng trò chơi : player, enemies, gameobject.
+- Entity cần phải được một Canvas hiển thị.
+- Tính năng :
 	- [PYXEL3](#PYXEL3) : Một `Canvas` có thể chứa nhiều `Entity`.
 </details>
 
@@ -47,15 +49,16 @@
 <details>
 <summary><h3>Đối tượng <code>Component</code></h3></summary>
 
-- Là các "thành phần" được gắn vào một và chỉ một `Entity`, các `Component` bên trong liên kết hoàn chỉnh thành một "thực thể" :
+- Là các thành phần được gắn vào một và chỉ một `Entity`, các `Component` bên trong `Entity` này liên kết với nhau và đảm nhiệm một vai trò cụ thể :
 	- [PYXEL4](#PYXEL4) : Một `Entity` có thể chứa nhiều `Component`.
 	- [PYXEL5](#PYXEL5) : Tùy vào loại `Component`, mà có thể có nhiều `Component` <u>cùng loại</u> cùng gắn trên một `Entity`, hoặc <u>chỉ một loại</u> `Component` được gắn trên `Entity` đó.
-	- [PYXEL6](#PYXEL6) : `Entity` chỉ có chức năng lưu trữ `Component`, không thể được phép kế thừa hoặc mở rộng.
+	- [PYXEL6](#PYXEL6) : `Component` có thể kế thừa và mở rộng.
+	- [PYXEL7](#PYXEL7) : `Entity` chỉ có chức năng lưu trữ `Component`, không cho phép kế thừa hoặc mở rộng.
 </details>
 
 ## <h1 align="center">⛓️ Sản phẩm ⛓️</h1>
 
-> Cùng điểm qua một số sản phẩm nhỏ được tạo bằng `PYXEL` nhé 😊
+> Cùng điểm qua một số sản phẩm nhỏ được tạo ra từ `PYXEL` nhé 😊
 
 ### Trang đăng nhập, đăng ký đơn giản, đẹp mắt.
 
